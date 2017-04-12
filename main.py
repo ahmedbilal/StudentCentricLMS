@@ -10,5 +10,9 @@ def index():
 def login():
 	return render_template("login.html", title="Login")
 
+@app.route('/join')
+def join():
+	return render_template("join.html", title="Join")
+
 if __name__== '__main__':
     app.run(debug=True)

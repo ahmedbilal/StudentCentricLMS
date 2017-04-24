@@ -31,17 +31,17 @@ app.config['SECRET_KEY'] = 'hard to guess string'
 
 
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = psycopg2.connect("dbname=ahmedbilalkhalid user=postgres")
-        return db
+#def get_db():
+#    db = getattr(g, '_database', None)
+#    if db is None:
+#        db = g._database = psycopg2.connect("dbname=ahmedbilalkhalid user=postgres")
+#        return db
 
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
+#@app.teardown_appcontext
+#def close_connection(exception):
+#    db = getattr(g, '_database', None)
+#    if db is not None:
+#        db.close()
 
 @app.route('/')
 def index():
@@ -84,4 +84,4 @@ def joinSuccess(user_key):
     return render_template("joinSuccess.html", title="Successfully Joined")
 
 if __name__== '__main__':
-    app.run(debug=True)
+    app.run()

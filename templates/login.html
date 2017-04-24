@@ -6,7 +6,7 @@
 {% block body %}
 <div class="row">
 	<div class="col s12 m12 l12">
-	<h2 class="center-align">Login</h2>
+	<h2 class="center-align">Login <i class="material-icons">vpn_key</i></h2>
 	</div>
 	<div class="col s12 m6 l4">
 		<div class="card">
@@ -14,33 +14,30 @@
 				<img src="{{ url_for('static', filename='images/authentication.jpg')}}" />
 				
 			</div>
+			<form method="POST" action="{{ url_for('login')}}">
 			<div class="card-content">
-				
-				 <form action="google.com">
-				    <div class="file-field input-field">
-				      <div class="btn red accent-4">
-				        <span>Pick Key</span>
-				        <input type="file">
-				      </div>
-				       <div class="file-path-wrapper">
-				        <input class="file-path validate" type="text">
-				       </div>
-				    </div>
-				  </form>
+				{{ form.roll.label }}
+				{{ form.roll() }}
+
+				{{ form.password.label }}
+				{{ form.password() }}
 			</div>
 			<div class="card-action">
-				<button class="btn waves-effect red accent-4 waves-light" type="submit" name="action">Apply Key</button>
+				<input type="submit" name="Login" value="Login" />
 			</div>
+			</form>
 		</div>
 
 
 	 
 	  </div>
 	  <div class="col s12 m6 l8">
-	  <p class="flow-text">
-	  Thanks to our <b>unique</b> authentication technique, passwords are things of past. You just need your key (generated at registration time) to login. <br>
-	  Key Lost! Don't worry contact administrator
-	  </p>
+	  <blockquote>
+		<p class="flow-text">
+		The roots of education are bitter but the fruit is sweet
+		<br><b>-Aristotle</b>
+		</p>
+	  </blockquote>
 	  </div>
 </div>
 {% endblock %}

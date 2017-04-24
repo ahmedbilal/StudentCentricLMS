@@ -1,0 +1,4 @@
+{
+    "python.linting.pylintEnabled": false,
+    { "pgsql.connection": "postgres://postgres:@localhost:5432/ahmedbilalkhalid" }
+}

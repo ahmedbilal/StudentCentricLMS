@@ -15,28 +15,30 @@
 			<div class="card-image">
 				<img src="{{ url_for('static', filename='images/join.jpg')}}" />
 			</div>
-			<div class="card-content">
-				<div class="input-field">
-		        <input id="name" type="text">
-		        <label for="name">Name</label>
-		        </div>
-		        <div class="input-field">
-		        <input id="roll" type="text">
-		        <label for="roll">Roll Number</label>
-		        </div>
-		        <div class="input-field">
-		        <input id="email" type="email" class="validate">
-		        <label for="email">Email</label>
-		        </div>
-		        
-	    	</div>
-	    	<div class="card-action">
-				<button class="btn waves-effect red accent-4 waves-light" type="submit" name="action">Join!</button>
-	    	</div>
+			<form method="POST" action="{{ url_for('join')}}">
+				<div class="card-content">
+						{{ form.csrf_token }}
+						{{ form.name.label }}
+						{{ form.name() }}
+
+						{{ form.roll.label }}
+						{{ form.roll() }}
+
+						{{ form.password.label }}
+						{{ form.password() }}
+				</div>
+				<div class="card-action">
+					<input type="submit" name="Join" value="Join" />
+				</div>
+			</form>
 	    </div>
 	</div>
 <div class="col s12 m6 l8">
   <p class="flow-text">
+{% for row in rows %}
+  <li>{{ row }}</li>
+{% endfor %}
+</ul>
   Thanks to our <b>unique</b> authentication technique, passwords are things of past. You just need your key (generated at registration time) to login. <br>
   Key Lost! Don't worry contact administrator
   </p>

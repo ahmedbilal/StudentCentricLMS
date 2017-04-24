@@ -12,9 +12,12 @@
     });
 	</script>
 	<style type="text/css">
-		html {
+		/*html {
 			background-image: url({{ url_for("static", filename = "images/background.jpg")}});
 			background-repeat: repeat;
+		}*/
+		html {
+			background-color: #333333;
 		}
 	</style>
 	{% endblock %}
@@ -22,7 +25,7 @@
 <body>
 	<div class="container">
 	  <nav>
-	    <div class="nav-wrapper red accent-4">
+	    <div class="nav-wrapper">
 	      <a href="{{ url_for('index') }}" class="brand-logo">Student Centric LMS</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
 	        <li><a href="sass.html">About us</a></li>
@@ -34,7 +37,7 @@
 	  {% if header %}
 	  <div class="parallax-container">
 	  	<div class="parallax">
-	  		<img src="{{ url_for('static', filename='images/student-circle.jpg') }}" />
+	  		<img src="{{ url_for('static', filename='images/header3.jpg') }}" />
 	  	</div>
 	  </div>
 	  {% endif %}

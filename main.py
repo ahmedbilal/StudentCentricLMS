@@ -1,5 +1,10 @@
+########################### Libraries ###########################
+
 # core library
 from flask import Flask, render_template, redirect, url_for, g, app, request
+
+# import settings
+from settings import *
 
 # library to connect postgresQL
 import psycopg2
@@ -9,34 +14,33 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired
 from werkzeug.utils import secure_filename
+########################### Libraries ###########################
 
-
-
+###########################   Forms   ########################### 
 class JoinForm(FlaskForm):
     name = StringField("name", validators = [DataRequired()])
     roll = StringField("roll number", validators = [DataRequired()])
     password = PasswordField("password", validators = [DataRequired()])
+    email = StringField("email", validators=[DataRequired()])
 class LoginForm(FlaskForm):
     roll = StringField("roll number")
     password = PasswordField("password")
+###########################   Forms   ########################### 
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = 'hard to guess string'
 
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = psycopg2.connect(Settings.postgresql_conn)
+        return db
 
-
-#def get_db():
-#    db = getattr(g, '_database', None)
-#    if db is None:
-#        db = g._database = psycopg2.connect("dbname=ahmedbilalkhalid user=postgres")
-#        return db
-
-#@app.teardown_appcontext
-#def close_connection(exception):
-#    db = getattr(g, '_database', None)
-#    if db is not None:
-#        db.close()
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 @app.route('/')
 def index():
@@ -68,14 +72,15 @@ def join():
         name = form.name.data
         roll = form.roll.data
         password = form.password.data
-        cur.execute("INSERT INTO \"Users\" (name, roll, password) VALUES (%s, %s, %s)",(name, roll, password))
+        email = form.email.data
+        cur.execute("INSERT INTO \"studentcentriclms\".\"Users\" (name, roll, email, password) VALUES (%s, %s, %s, %s)",(name, roll, email, password))
         conn.commit()
         return redirect(url_for('joinSuccess'))
     return render_template("join.html", title="Join", form = form)
 
 
 @app.route('/joinSuccess')
-def joinSuccess(user_key):
+def joinSuccess():
     return render_template("joinSuccess.html", title="Successfully Joined")
 
 if __name__== '__main__':

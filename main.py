@@ -8,13 +8,8 @@ import psycopg2
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired
-
-# to create random keys
-import random
-
 from werkzeug.utils import secure_filename
 
-import os
 
 
 class JoinForm(FlaskForm):
